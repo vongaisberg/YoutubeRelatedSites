@@ -111,6 +111,30 @@ public class YoutubeRelatedSites {
 		return null;
 	}
 
+	public String getSpotify() {
+		for (String string : list) {
+			if (string.contains("spotify.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getTumblr() {
+		for (String string : list) {
+			if (string.contains("tumblr.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getSoundcloud() {
+		for (String string : list) {
+			if (string.contains("soundcloud.com"))
+				return string;
+		}
+		return null;
+	}
+
 	/**
 	 * Send HTTP requests to a webserver and fetch the answer. Will send
 	 * <code>http.agent=Chrome</code>
