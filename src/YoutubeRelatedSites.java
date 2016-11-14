@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 public class YoutubeRelatedSites {
 	Map<String, String> map = new HashMap<String, String>();
+	ArrayList<String> list;
 
 	/**
 	 * @throws IOException
@@ -24,7 +26,8 @@ public class YoutubeRelatedSites {
 	public YoutubeRelatedSites(URL channelURL) throws IOException {
 
 		String content = sendHTTPRequest(channelURL);
-		Map<String, String> map = new HashMap<String, String>();
+		map = new HashMap<String, String>();
+		list = new ArrayList<String>();
 		String[] parts = content.split("<li class=\"channel-links-item\">");
 		for (int i = 1; i < parts.length; i++) {
 			int start = parts[i].indexOf("<a href=\"");
@@ -32,18 +35,17 @@ public class YoutubeRelatedSites {
 			String part = parts[i].substring(start, stop);
 			// System.out.println(part);
 			String link = part.substring(9, part.indexOf("\"", 9));
-			System.out.println(link);
 			start = part.indexOf("<span class=\"about-channel-link-text\">") + 38;
 			stop = part.indexOf("</span>", start);
 			String text;
 			try {
 				text = part.substring(start, stop);
-				System.out.println(text);
 			} catch (StringIndexOutOfBoundsException e) {
 				text = null;
 			}
 
 			map.put(link, text);
+			list.add(link);
 
 		}
 
@@ -51,6 +53,62 @@ public class YoutubeRelatedSites {
 
 	public Map<String, String> getLinks() {
 		return map;
+	}
+
+	public String getTwitter() {
+		for (String string : list) {
+			if (string.contains("twitter.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getFacebook() {
+		for (String string : list) {
+			if (string.contains("facebook.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getGooglePlus() {
+		for (String string : list) {
+			if (string.contains("plus.google.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getTwitch() {
+		for (String string : list) {
+			if (string.contains("twitch.tv"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getYoutube() {
+		for (String string : list) {
+			if (string.contains("youtube.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getInstagram() {
+		for (String string : list) {
+			if (string.contains("instagram.com"))
+				return string;
+		}
+		return null;
+	}
+
+	public String getSnapchat() {
+		for (String string : list) {
+			if (string.contains("snapchat.com"))
+				return string;
+		}
+		return null;
 	}
 
 	/**
