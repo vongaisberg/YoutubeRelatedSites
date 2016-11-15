@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -39,7 +40,7 @@ public class YoutubeRelatedSites {
 			stop = part.indexOf("</span>", start);
 			String text;
 			try {
-				text = part.substring(start, stop);
+				text = part.substring(start, stop).trim();
 			} catch (StringIndexOutOfBoundsException e) {
 				text = null;
 			}
@@ -57,7 +58,8 @@ public class YoutubeRelatedSites {
 
 	public URL getTwitter() {
 		for (URL url : list) {
-			if (url.getHost().equals("twitter.com"))
+			if (url.getHost().equals("twitter.com")
+					|| url.getHost().equals("www.twitter.com"))
 				return url;
 		}
 		return null;
@@ -65,7 +67,8 @@ public class YoutubeRelatedSites {
 
 	public URL getFacebook() {
 		for (URL url : list) {
-			if (url.getHost().equals("facebook.com"))
+			if (url.getHost().equals("facebook.com")
+					|| url.getHost().equals("www.facebook.com"))
 				return url;
 		}
 		return null;
@@ -81,7 +84,8 @@ public class YoutubeRelatedSites {
 
 	public URL getTwitch() {
 		for (URL url : list) {
-			if (url.getHost().equals("twitch.tv"))
+			if (url.getHost().equals("twitch.tv")
+					|| url.getHost().equals("www.twitch.com"))
 				return url;
 		}
 		return null;
@@ -89,7 +93,8 @@ public class YoutubeRelatedSites {
 
 	public URL getYouTube() {
 		for (URL url : list) {
-			if (url.getHost().equals("youtube.com"))
+			if (url.getHost().equals("youtube.com")
+					|| url.getHost().equals("www.youtube.com"))
 				return url;
 		}
 		return null;
@@ -97,7 +102,8 @@ public class YoutubeRelatedSites {
 
 	public URL getInstagram() {
 		for (URL url : list) {
-			if (url.getHost().equals("instagram.com"))
+			if (url.getHost().equals("instagram.com")
+					|| url.getHost().equals("www.instagram.com"))
 				return url;
 		}
 		return null;
@@ -105,7 +111,8 @@ public class YoutubeRelatedSites {
 
 	public URL getSnapchat() {
 		for (URL url : list) {
-			if (url.getHost().equals("snapchat.com"))
+			if (url.getHost().equals("snapchat.com")
+					|| url.getHost().equals("www.snapchat.com"))
 				return url;
 		}
 		return null;
@@ -113,7 +120,8 @@ public class YoutubeRelatedSites {
 
 	public URL getSpotify() {
 		for (URL url : list) {
-			if (url.getHost().equals("spotify.com"))
+			if (url.getHost().equals("spotify.com")
+					|| url.getHost().equals("play.spotify.com"))
 				return url;
 		}
 		return null;
@@ -121,7 +129,7 @@ public class YoutubeRelatedSites {
 
 	public URL getTumblr() {
 		for (URL url : list) {
-			if (url.getHost().equals("tumblr.com"))
+			if (url.getHost().contains("tumblr.com"))
 				return url;
 		}
 		return null;
@@ -129,7 +137,8 @@ public class YoutubeRelatedSites {
 
 	public URL getSoundcloud() {
 		for (URL url : list) {
-			if (url.getHost().equals("soundcloud.com"))
+			if (url.getHost().equals("soundcloud.com")
+					|| url.getHost().equals("www.soundcloud.com"))
 				return url;
 		}
 		return null;
@@ -160,8 +169,16 @@ public class YoutubeRelatedSites {
 
 	public static void main(String[] args) throws MalformedURLException,
 			IOException {
-		new YoutubeRelatedSites(
+		YoutubeRelatedSites yrs = new YoutubeRelatedSites(
 				new URL(
 						"https://www.youtube.com/user/WatchMojo/about?&ab_channel=WatchMojo.com"));
+		Map map = yrs.getLinks();
+		Set set = map.keySet();
+		System.out.println(yrs.getTwitter());
+		for (Object object : set) {
+			System.out.println(((URL) object).toString());
+			System.out.println(map.get((URL) object));
+		}
+
 	}
 }
