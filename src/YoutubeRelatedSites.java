@@ -16,8 +16,8 @@ import java.util.Map;
  *
  */
 public class YoutubeRelatedSites {
-	Map<String, String> map = new HashMap<String, String>();
-	ArrayList<String> list;
+	Map<URL, String> map = new HashMap<URL, String>();
+	ArrayList<URL> list;
 
 	/**
 	 * @throws IOException
@@ -26,8 +26,8 @@ public class YoutubeRelatedSites {
 	public YoutubeRelatedSites(URL channelURL) throws IOException {
 
 		String content = sendHTTPRequest(channelURL);
-		map = new HashMap<String, String>();
-		list = new ArrayList<String>();
+		map = new HashMap<URL, String>();
+		list = new ArrayList<URL>();
 		String[] parts = content.split("<li class=\"channel-links-item\">");
 		for (int i = 1; i < parts.length; i++) {
 			int start = parts[i].indexOf("<a href=\"");
@@ -44,93 +44,93 @@ public class YoutubeRelatedSites {
 				text = null;
 			}
 
-			map.put(link, text);
-			list.add(link);
+			map.put(new URL(link), text);
+			list.add(new URL(link));
 
 		}
 
 	}
 
-	public Map<String, String> getLinks() {
+	public Map<URL, String> getLinks() {
 		return map;
 	}
 
-	public String getTwitter() {
-		for (String string : list) {
-			if (string.contains("twitter.com"))
-				return string;
+	public URL getTwitter() {
+		for (URL url : list) {
+			if (url.getHost().equals("twitter.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getFacebook() {
-		for (String string : list) {
-			if (string.contains("facebook.com"))
-				return string;
+	public URL getFacebook() {
+		for (URL url : list) {
+			if (url.getHost().equals("facebook.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getGooglePlus() {
-		for (String string : list) {
-			if (string.contains("plus.google.com"))
-				return string;
+	public URL getGooglePlus() {
+		for (URL url : list) {
+			if (url.getHost().equals("plus.google.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getTwitch() {
-		for (String string : list) {
-			if (string.contains("twitch.tv"))
-				return string;
+	public URL getTwitch() {
+		for (URL url : list) {
+			if (url.getHost().equals("twitch.tv"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getYoutube() {
-		for (String string : list) {
-			if (string.contains("youtube.com"))
-				return string;
+	public URL getYouTube() {
+		for (URL url : list) {
+			if (url.getHost().equals("youtube.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getInstagram() {
-		for (String string : list) {
-			if (string.contains("instagram.com"))
-				return string;
+	public URL getInstagram() {
+		for (URL url : list) {
+			if (url.getHost().equals("instagram.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getSnapchat() {
-		for (String string : list) {
-			if (string.contains("snapchat.com"))
-				return string;
+	public URL getSnapchat() {
+		for (URL url : list) {
+			if (url.getHost().equals("snapchat.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getSpotify() {
-		for (String string : list) {
-			if (string.contains("spotify.com"))
-				return string;
+	public URL getSpotify() {
+		for (URL url : list) {
+			if (url.getHost().equals("spotify.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getTumblr() {
-		for (String string : list) {
-			if (string.contains("tumblr.com"))
-				return string;
+	public URL getTumblr() {
+		for (URL url : list) {
+			if (url.getHost().equals("tumblr.com"))
+				return url;
 		}
 		return null;
 	}
 
-	public String getSoundcloud() {
-		for (String string : list) {
-			if (string.contains("soundcloud.com"))
-				return string;
+	public URL getSoundcloud() {
+		for (URL url : list) {
+			if (url.getHost().equals("soundcloud.com"))
+				return url;
 		}
 		return null;
 	}
