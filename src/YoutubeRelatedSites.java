@@ -56,92 +56,59 @@ public class YoutubeRelatedSites {
 		return map;
 	}
 
-	public URL getTwitter() {
-		for (URL url : list) {
-			if (url.getHost().equals("twitter.com")
-					|| url.getHost().equals("www.twitter.com"))
-				return url;
-		}
-		return null;
+	public URL[] getTwitter() {
+		return searchforURL("twitter.com");
 	}
 
-	public URL getFacebook() {
-		for (URL url : list) {
-			if (url.getHost().equals("facebook.com")
-					|| url.getHost().equals("www.facebook.com"))
-				return url;
-		}
-		return null;
+	public URL[] getFacebook() {
+		return searchforURL("facebook.com");
 	}
 
-	public URL getGooglePlus() {
-		for (URL url : list) {
-			if (url.getHost().equals("plus.google.com"))
-				return url;
-		}
-		return null;
+	public URL[] getGooglePlus() {
+		return searchforURL("plus.google.com");
 	}
 
-	public URL getTwitch() {
-		for (URL url : list) {
-			if (url.getHost().equals("twitch.tv")
-					|| url.getHost().equals("www.twitch.com"))
-				return url;
-		}
-		return null;
+	public URL[] getTwitch() {
+		return searchforURL("twitch.com");
 	}
 
-	public URL getYouTube() {
-		for (URL url : list) {
-			if (url.getHost().equals("youtube.com")
-					|| url.getHost().equals("www.youtube.com"))
-				return url;
-		}
-		return null;
+	public URL[] getYouTube() {
+		return searchforURL("youtube.com");
 	}
 
-	public URL getInstagram() {
-		for (URL url : list) {
-			if (url.getHost().equals("instagram.com")
-					|| url.getHost().equals("www.instagram.com"))
-				return url;
-		}
-		return null;
+	public URL[] getInstagram() {
+		return searchforURL("instagram.com");
 	}
 
-	public URL getSnapchat() {
-		for (URL url : list) {
-			if (url.getHost().equals("snapchat.com")
-					|| url.getHost().equals("www.snapchat.com"))
-				return url;
-		}
-		return null;
+	public URL[] getSnapchat() {
+		return searchforURL("snapchat.com");
 	}
 
-	public URL getSpotify() {
-		for (URL url : list) {
-			if (url.getHost().equals("spotify.com")
-					|| url.getHost().equals("play.spotify.com"))
-				return url;
-		}
-		return null;
+	public URL[] getSpotify() {
+		return searchforURL("spotify.com");
 	}
 
-	public URL getTumblr() {
-		for (URL url : list) {
-			if (url.getHost().contains("tumblr.com"))
-				return url;
-		}
-		return null;
+	public URL[] getTumblr() {
+		return searchforURL("tumblr.com");
 	}
 
-	public URL getSoundcloud() {
+	public URL[] getSoundcloud() {
+		return searchforURL("soundcloud.com");
+	}
+
+	public URL[] searchforURL(String keyword) {
+		ArrayList<URL> list2 = new ArrayList<URL>();
 		for (URL url : list) {
-			if (url.getHost().equals("soundcloud.com")
-					|| url.getHost().equals("www.soundcloud.com"))
-				return url;
+			if (url.getHost().contains(keyword))
+				list2.add(url);
 		}
-		return null;
+		if (list2.size() == 0)
+			return null;
+		URL[] urls = new URL[list2.size()];
+		for (int i = 0; i < list2.size(); i++)
+			urls[i] = list2.get(i);
+		return urls;
+
 	}
 
 	/**
@@ -174,7 +141,7 @@ public class YoutubeRelatedSites {
 						"https://www.youtube.com/user/WatchMojo/about?&ab_channel=WatchMojo.com"));
 		Map map = yrs.getLinks();
 		Set set = map.keySet();
-		System.out.println(yrs.getTwitter());
+		System.out.println(yrs.getTwitter()[0].toString());
 		for (Object object : set) {
 			System.out.println(((URL) object).toString());
 			System.out.println(map.get((URL) object));
