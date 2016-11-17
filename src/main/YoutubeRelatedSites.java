@@ -1,3 +1,5 @@
+package main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,7 +15,10 @@ import java.util.Set;
  */
 
 /**
- * @author Maximilian
+ * Get the so called "related links" of a Youtube channel page
+ * 
+ * @author <a href="http://grunzwanzling.me">Maximilian von Gaisberg
+ *         (Grunzwanzling)</a>
  *
  */
 public class YoutubeRelatedSites {
@@ -21,8 +26,12 @@ public class YoutubeRelatedSites {
 	ArrayList<URL> list;
 
 	/**
-	 * @throws IOException
+	 * Analyze a YouTube-channel and filter out all the related sites
 	 * 
+	 * @param channelURL
+	 *            The <code>URL</code> of the channel to analyze
+	 * @throws IOException
+	 *             If something went wrong
 	 */
 	public YoutubeRelatedSites(URL channelURL) throws IOException {
 
@@ -52,50 +61,113 @@ public class YoutubeRelatedSites {
 
 	}
 
+	/**
+	 * Get all the related links of the YouTube-channel
+	 * 
+	 * @return A <code>Map</code> of all the links
+	 */
 	public Map<URL, String> getLinks() {
 		return map;
 	}
 
+	/**
+	 * Get all the Twitter links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getTwitter() {
 		return searchforURL("twitter.com");
 	}
 
+	/**
+	 * Get all the Facebook links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getFacebook() {
 		return searchforURL("facebook.com");
 	}
 
+	/**
+	 * Get all the Google Plus links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getGooglePlus() {
 		return searchforURL("plus.google.com");
 	}
 
+	/**
+	 * Get all the Twitch links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getTwitch() {
 		return searchforURL("twitch.com");
 	}
 
+	/**
+	 * Get all the YouTube links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getYouTube() {
 		return searchforURL("youtube.com");
 	}
 
+	/**
+	 * Get all the Instagram links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getInstagram() {
 		return searchforURL("instagram.com");
 	}
 
+	/**
+	 * Get all the Snapchat links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getSnapchat() {
 		return searchforURL("snapchat.com");
 	}
 
+	/**
+	 * Get all the Spotify links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getSpotify() {
 		return searchforURL("spotify.com");
 	}
 
+	/**
+	 * Get all the Tumblr links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getTumblr() {
 		return searchforURL("tumblr.com");
 	}
 
+	/**
+	 * Get all the Soundcloud links
+	 * 
+	 * @return A <code>URL[]</code> with all the links
+	 */
 	public URL[] getSoundcloud() {
 		return searchforURL("soundcloud.com");
 	}
 
+	/**
+	 * Search for all the <code>URL</code> objects witch contain a specific
+	 * keyword
+	 * 
+	 * @param keyword
+	 *            The keyword to search for
+	 * @return The <code>URL[]</code> with the given keyword
+	 */
 	public URL[] searchforURL(String keyword) {
 		ArrayList<URL> list2 = new ArrayList<URL>();
 		for (URL url : list) {
@@ -109,6 +181,17 @@ public class YoutubeRelatedSites {
 			urls[i] = list2.get(i);
 		return urls;
 
+	}
+
+	/**
+	 * Get the linktext for a <code>URL</code>
+	 * 
+	 * @param url
+	 *            The <code>URL</code> to check
+	 * @return The linktext
+	 */
+	public String getLinkText(URL url) {
+		return map.get(url);
 	}
 
 	/**
@@ -134,6 +217,13 @@ public class YoutubeRelatedSites {
 		return answer;
 	}
 
+	/**
+	 * Just for demonstration purposes
+	 * 
+	 * @param args
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws MalformedURLException,
 			IOException {
 		YoutubeRelatedSites yrs = new YoutubeRelatedSites(
