@@ -11,11 +11,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 
- */
-
-/**
  * Get the so called "related links" of a Youtube channel page
+ * 
+ * @see <a href="http://grunzwanzling.me/YoutubeRelatedSites/">Javadoc
+ *      Website</a>
  * 
  * @author <a href="http://grunzwanzling.me">Maximilian von Gaisberg
  *         (Grunzwanzling)</a>
