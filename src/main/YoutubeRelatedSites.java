@@ -23,6 +23,7 @@ import java.util.Set;
 public class YoutubeRelatedSites {
 	Map<URL, String> map = new HashMap<URL, String>();
 	ArrayList<URL> list;
+	String content;
 
 	/**
 	 * Analyze a YouTube-channel and filter out all the related sites
@@ -34,7 +35,7 @@ public class YoutubeRelatedSites {
 	 */
 	public YoutubeRelatedSites(URL channelURL) throws IOException {
 
-		String content = sendHTTPRequest(channelURL);
+		content = sendHTTPRequest(channelURL);
 		map = new HashMap<URL, String>();
 		list = new ArrayList<URL>();
 		String[] parts = content.split("<li class=\"channel-links-item\">");
@@ -58,6 +59,17 @@ public class YoutubeRelatedSites {
 
 		}
 
+	}
+
+	public String getTwitterName(String username) {
+		if (content.indexOf("twitter.com/") == -1)
+			return null;
+
+		String name = content.substring(content.indexOf("twitter.com/") + 12,
+				content.indexOf("\"", content.indexOf("twitter.com/") + 12));
+		name = name.replace("#!/", "");
+		name = name.replace("/", "");
+		return "@" + name;
 	}
 
 	/**
