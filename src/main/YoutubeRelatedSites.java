@@ -61,15 +61,30 @@ public class YoutubeRelatedSites {
 
 	}
 
-	public String getTwitterName(String username) {
-		if (content.indexOf("twitter.com/") == -1)
-			return null;
+	/**
+	 * Get all Twitter usernames of the Youtube channel
+	 * 
+	 * @return A <code>String[]</code> with all the usernames
+	 */
+	public String[] getTwitterNames() {
 
-		String name = content.substring(content.indexOf("twitter.com/") + 12,
-				content.indexOf("\"", content.indexOf("twitter.com/") + 12));
-		name = name.replace("#!/", "");
-		name = name.replace("/", "");
-		return "@" + name;
+		ArrayList<String> list2 = new ArrayList<String>();
+		for (URL url : list) {
+
+			if (url.toString().indexOf("twitter.com/") != -1) {
+				String name = content.substring(
+						content.indexOf("twitter.com/") + 12, content.indexOf(
+								"\"", content.indexOf("twitter.com/") + 12));
+				list2.add(name);
+			}
+		}
+		if (list2.size() == 0)
+			return null;
+		String[] names = new String[list2.size()];
+		for (int i = 0; i < list2.size(); i++)
+			names[i] = list2.get(i);
+		return names;
+
 	}
 
 	/**
@@ -247,6 +262,7 @@ public class YoutubeRelatedSites {
 			System.out.println(((URL) object).toString());
 			System.out.println(map.get((URL) object));
 		}
+		System.out.println("\nTwitter username: @" + yrs.getTwitterNames()[0]);
 
 	}
 }
