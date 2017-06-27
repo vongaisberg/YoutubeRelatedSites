@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Get the so called "related links" of a Youtube channel page
@@ -72,9 +71,8 @@ public class YoutubeRelatedSites {
 		for (URL url : list) {
 
 			if (url.toString().indexOf("twitter.com/") != -1) {
-				String name = content.substring(
-						content.indexOf("twitter.com/") + 12, content.indexOf(
-								"\"", content.indexOf("twitter.com/") + 12));
+				String name = content.substring(content.indexOf("twitter.com/") + 12,
+						content.indexOf("\"", content.indexOf("twitter.com/") + 12));
 				list2.add(name);
 			}
 		}
@@ -232,8 +230,7 @@ public class YoutubeRelatedSites {
 	 */
 	public static String sendHTTPRequest(URL url) throws IOException {
 		System.setProperty("http.agent", "Chrome");
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				url.openStream()));
+		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 		String answer = "";
 		String line = "";
 		while (null != (line = br.readLine())) {
@@ -250,18 +247,12 @@ public class YoutubeRelatedSites {
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws MalformedURLException,
-			IOException {
+	public static void main(String[] args) throws MalformedURLException, IOException {
 		YoutubeRelatedSites yrs = new YoutubeRelatedSites(
-				new URL(
-						"https://www.youtube.com/user/WatchMojo/about?&ab_channel=WatchMojo.com"));
-		Map map = yrs.getLinks();
-		Set set = map.keySet();
+				new URL("https://www.youtube.com/user/WatchMojo/about?&ab_channel=WatchMojo.com"));
+
 		System.out.println(yrs.getTwitter()[0].toString());
-		for (Object object : set) {
-			System.out.println(((URL) object).toString());
-			System.out.println(map.get((URL) object));
-		}
+
 		System.out.println("\nTwitter username: @" + yrs.getTwitterNames()[0]);
 
 	}
